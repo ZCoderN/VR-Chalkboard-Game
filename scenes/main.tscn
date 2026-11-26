@@ -1,0 +1,221 @@
+[gd_scene load_steps=24 format=3 uid="uid://ddxmi1hcqvngg"]
+
+[ext_resource type="Script" uid="uid://cjq02xik708ba" path="res://scripts/grid_visual.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://ulriyem4c8eq" path="res://scenes/cube.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://06etyrwmhdtp" path="res://scenes/sphere.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://c5ajdlr314cfv" path="res://scenes/hand.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://4v1nq10tx1ib" path="res://scripts/puzzle_manager.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://rnmowdue0wv6" path="res://scripts/camera_pivot.gd" id="6_tefeu"]
+
+[sub_resource type="Environment" id="Environment_sgp6g"]
+background_mode = 1
+background_color = Color(0.641934, 0.64193404, 0.64193386, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sgp6g"]
+size = Vector2(4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgp6g"]
+albedo_color = Color(0.024103627, 0.20548677, 0.116699494, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbgi4"]
+size = Vector3(4.2, 0.12, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tefeu"]
+albedo_color = Color(0.5647059, 0.44705883, 0.36078432, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_o6xl0"]
+size = Vector3(4.2, 0.12, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tipki"]
+albedo_color = Color(0.5647059, 0.44705883, 0.36078432, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_85g3d"]
+size = Vector3(0.15, 0.12, 4.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
+albedo_color = Color(0.5647059, 0.44705883, 0.36078432, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_ya4ey"]
+size = Vector3(0.15, 0.12, 4.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb6dy"]
+albedo_color = Color(0.564101, 0.4477902, 0.36034673, 1)
+roughness = 0.7
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jyhfs"]
+size = Vector3(0.2, 1, 4.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tbgi4"]
+size = Vector3(0.2, 1, 4.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tefeu"]
+size = Vector3(4.2, 1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6xl0"]
+size = Vector3(4.2, 1, 0.2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
+line_spacing = 2.0
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_tefeu"]
+font_size = 11
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.6232792, 0.78199935, 0, -0.78199935, -0.6232792, 0, 15.282011, -23.60662)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sgp6g")
+
+[node name="Board" type="Node3D" parent="."]
+
+[node name="Surface" type="MeshInstance3D" parent="Board"]
+mesh = SubResource("PlaneMesh_sgp6g")
+surface_material_override/0 = SubResource("StandardMaterial3D_sgp6g")
+
+[node name="GridVisual" type="Node3D" parent="Board"]
+script = ExtResource("1_o5qli")
+
+[node name="Cube" parent="Board" instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.325, -1.5)
+
+[node name="Cube2" parent="Board" instance=ExtResource("2_sugp2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.325, -1.5)
+
+[node name="Sphere" parent="Board" instance=ExtResource("3_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.325, -1.5)
+
+[node name="Frame" type="Node3D" parent="Board"]
+
+[node name="FrameTop" type="MeshInstance3D" parent="Board/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, -2.075)
+mesh = SubResource("BoxMesh_tbgi4")
+surface_material_override/0 = SubResource("StandardMaterial3D_tefeu")
+
+[node name="FrameBottom" type="MeshInstance3D" parent="Board/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 2.075)
+mesh = SubResource("BoxMesh_o6xl0")
+surface_material_override/0 = SubResource("StandardMaterial3D_tipki")
+
+[node name="FrameLeft" type="MeshInstance3D" parent="Board/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.075, 0.06, 0)
+mesh = SubResource("BoxMesh_85g3d")
+surface_material_override/0 = SubResource("StandardMaterial3D_choun")
+
+[node name="FrameRight" type="MeshInstance3D" parent="Board/Frame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.075, 0.06, 0)
+mesh = SubResource("BoxMesh_ya4ey")
+surface_material_override/0 = SubResource("StandardMaterial3D_eb6dy")
+
+[node name="Hand" parent="." instance=ExtResource("4_jyhfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="CameraPivot" type="Node3D" parent="Hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+script = ExtResource("6_tefeu")
+
+[node name="Camera3D" type="Camera3D" parent="Hand/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0.6, 1.2)
+current = true
+
+[node name="BoardBoundaries" type="StaticBody3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BoardBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardBoundaries/StaticBody3D"]
+shape = SubResource("BoxShape3D_jyhfs")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="BoardBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardBoundaries/StaticBody3D2"]
+shape = SubResource("BoxShape3D_tbgi4")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="BoardBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardBoundaries/StaticBody3D3"]
+shape = SubResource("BoxShape3D_tefeu")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="BoardBoundaries"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoardBoundaries/StaticBody3D4"]
+shape = SubResource("BoxShape3D_o6xl0")
+
+[node name="PuzzleManager" type="Node" parent="." node_paths=PackedStringArray("cube_1", "cube_2", "sphere_1", "target_cube_1", "target_cube_2", "target_sphere_1", "victory_label")]
+script = ExtResource("5_tbgi4")
+cube_1 = NodePath("../Board/Cube")
+cube_2 = NodePath("../Board/Cube2")
+sphere_1 = NodePath("../Board/Sphere")
+target_cube_1 = NodePath("Targets/TargetCube1")
+target_cube_2 = NodePath("Targets/TargetCube2")
+target_sphere_1 = NodePath("Targets/TargetSphere1")
+victory_label = NodePath("../GameUI/VictoryLabel")
+
+[node name="Targets" type="Node3D" parent="PuzzleManager"]
+
+[node name="TargetCube1" type="Marker3D" parent="PuzzleManager/Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.325, 1.5)
+
+[node name="TargetCube2" type="Marker3D" parent="PuzzleManager/Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.325, 1.5)
+
+[node name="TargetSphere1" type="Marker3D" parent="PuzzleManager/Targets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.325, 1.5)
+
+[node name="GameUI" type="CanvasLayer" parent="."]
+
+[node name="VictoryLabel" type="Label" parent="GameUI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PUZZLE SOLVED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuestUI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="QuestUI"]
+offset_right = 300.0
+offset_bottom = 359.0
+
+[node name="QuestLabel" type="Label" parent="QuestUI/Panel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 1.0
+offset_right = 292.0
+offset_bottom = 180.0
+text = "YOUR OBJECTIVE
+CUBE 1 -> Row 4, Column 1
+CUBE 2 -> Row 4, Column 2
+Sphere -> Row 4, Column 3
+
+Push all objects into
+their correct positions!"
+label_settings = SubResource("LabelSettings_tbgi4")
+vertical_alignment = 1
+
+[node name="ControlsLabel" type="Label" parent="QuestUI"]
+offset_left = 19.0
+offset_top = 198.0
+offset_right = 305.0
+offset_bottom = 377.0
+text = "CONTROLS
+
+W- Move Forward
+S - Move Back
+A - Move Left
+D- Move Right
+Push objects with your hand"
+label_settings = SubResource("LabelSettings_tefeu")

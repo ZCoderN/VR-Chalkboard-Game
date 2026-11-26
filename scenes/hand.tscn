@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ajdlr314cfv"]
+
+[ext_resource type="Script" uid="uid://c2jwjcreiewir" path="res://scripts/hand.gd" id="1_eyfoh"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1gd3j"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eyfoh"]
+radius = 0.15
+
+[node name="Hand" type="CharacterBody3D"]
+script = ExtResource("1_eyfoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1gd3j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_eyfoh")
